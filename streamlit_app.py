@@ -123,14 +123,6 @@ if st.button("Generate Recommendations", key="generate_btn"):
                 }),
                 use_container_width=True
             )
-                }),
-                use_container_width=True
-            )
-                "vCPUs": "{:.0f}",
-                "RAM_GB": "{:.0f}",
-                "storage_GB": "{:.0f}"
-            }), use_container_width=True)
-            
             # Export options
             st.subheader("Export Results")
             
