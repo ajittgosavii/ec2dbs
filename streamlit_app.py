@@ -96,6 +96,20 @@ if st.button("Generate Recommendations", key="generate_btn"):
             
             # Display results
             st.success("EC2 Sizing Recommendations")
+
+            # Center-align the dataframe display
+            st.markdown(
+                """
+                <style>
+                div[data-testid='stDataFrame'] {
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 90%;
+                }
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
             st.markdown(
     "<style>div[data-testid='stDataFrame'] { margin: auto; width: 90%; }</style>", 
     unsafe_allow_html=True
