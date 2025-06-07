@@ -90,31 +90,36 @@ calculator.inputs.update(inputs)
 if st.button("Generate Recommendations", key="generate_btn"):
     with st.spinner("Calculating EC2 sizing recommendations..."):
         try:
+
             results = calculator.generate_all_recommendations()
+
+            # Remove redundant 'environment' key to avoid duplication
+            for val in results.values():
+                val.pop("environment", None)
+
+            # Create DataFrame
             df = pd.DataFrame.from_dict(results, orient='index').reset_index()
             df.rename(columns={"index": "Environment"}, inplace=True)
-            
-            # Display results
-            st.success("EC2 Sizing Recommendations")
 
-            # Center-align the dataframe display
+            # Reorder columns for clarity
+            preferred_order = [
+                "Environment", "instance_type", "vCPUs", "RAM_GB", "storage_GB",
+                "ebs_type", "iops_required", "throughput_required", "family", "processor"
+            ]
+            df = df[[col for col in preferred_order if col in df.columns]]
+
+            # Display results
+            st.success("✅ EC2 Sizing Recommendations Generated")
+
             st.markdown(
-                """
-                <style>
-                div[data-testid='stDataFrame'] {
-                    margin-left: auto;
-                    margin-right: auto;
-                    width: 90%;
-                }
-                </style>
-                """,
+                "<style>div[data-testid='stDataFrame'] { margin: auto; width: 90%; }</style>", 
                 unsafe_allow_html=True
             )
-            st.markdown(
-    "<style>div[data-testid='stDataFrame'] { margin: auto; width: 90%; }</style>", 
-    unsafe_allow_html=True
-)
             st.dataframe(df.style.format({
+                "vCPUs": "{:.0f}",
+                "RAM_GB": "{:.0f}",
+                "storage_GB": "{:.0f}"
+            }), use_container_width=True)
                 "vCPUs": "{:.0f}",
                 "RAM_GB": "{:.0f}",
                 "storage_GB": "{:.0f}"
