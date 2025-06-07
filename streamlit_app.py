@@ -114,7 +114,7 @@ if st.button("Generate Recommendations", key="generate_btn"):
     "<style>div[data-testid='stDataFrame'] { margin: auto; width: 90%; }</style>", 
     unsafe_allow_html=True
 )
-st.dataframe(df.style.format({
+            st.dataframe(df.style.format({
                 "vCPUs": "{:.0f}",
                 "RAM_GB": "{:.0f}",
                 "storage_GB": "{:.0f}"
