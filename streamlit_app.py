@@ -115,11 +115,15 @@ if st.button("Generate Recommendations", key="generate_btn"):
                 "<style>div[data-testid='stDataFrame'] { margin: auto; width: 90%; }</style>", 
                 unsafe_allow_html=True
             )
-            st.dataframe(df.style.format({
-                "vCPUs": "{:.0f}",
-                "RAM_GB": "{:.0f}",
-                "storage_GB": "{:.0f}"
-                }), use_container_width=True)
+            st.dataframe(
+                df.style.format({
+                    "vCPUs": "{:.0f}",
+                    "RAM_GB": "{:.0f}",
+                    "storage_GB": "{:.0f}"
+                    }), use_container_width=True)
+                }),
+                use_container_width=True
+            )
                 "vCPUs": "{:.0f}",
                 "RAM_GB": "{:.0f}",
                 "storage_GB": "{:.0f}"
